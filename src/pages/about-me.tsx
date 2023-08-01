@@ -3,10 +3,9 @@
  * Started on 19/07/2023.
  */
 
-import * as React from "react"
 import { graphql } from "gatsby"
+import AboutMePage from "../components/pages/AboutMe"
 import { generateHeadWithTitle } from "../utils/generateHeadWithTitle"
-import NotFoundPage from "../components/pages/NotFound"
 
 export const query = graphql`
   query ($language: String!) {
@@ -20,7 +19,7 @@ export const query = graphql`
       }
     }
     backgroundImage: strapiBackgroundImage {
-      notFound {
+      aboutMe {
         url
       }
     }
@@ -28,9 +27,9 @@ export const query = graphql`
       title
     }
     content: strapiContent(locale: { eq: $language }) {
-      notFound {
+      aboutMe {
         data {
-          notFound
+          aboutMe
         }
       }
     }
@@ -47,6 +46,6 @@ export const query = graphql`
   }
 `
 
-export const Head = generateHeadWithTitle("notFound")
+export const Head = generateHeadWithTitle("aboutMe")
 
-export default NotFoundPage
+export default AboutMePage

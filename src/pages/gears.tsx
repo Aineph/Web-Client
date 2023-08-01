@@ -3,10 +3,9 @@
  * Started on 19/07/2023.
  */
 
-import * as React from "react"
 import { graphql } from "gatsby"
 import { generateHeadWithTitle } from "../utils/generateHeadWithTitle"
-import NotFoundPage from "../components/pages/NotFound"
+import GearsPage from "../components/pages/Gears"
 
 export const query = graphql`
   query ($language: String!) {
@@ -20,7 +19,7 @@ export const query = graphql`
       }
     }
     backgroundImage: strapiBackgroundImage {
-      notFound {
+      gears {
         url
       }
     }
@@ -28,9 +27,22 @@ export const query = graphql`
       title
     }
     content: strapiContent(locale: { eq: $language }) {
-      notFound {
+      gears {
         data {
-          notFound
+          gears
+        }
+      }
+    }
+    gears: allStrapiGear(
+      filter: { locale: { eq: $language } }
+      sort: { strapi_id: ASC }
+    ) {
+      nodes {
+        category
+        content {
+          data {
+            content
+          }
         }
       }
     }
@@ -47,6 +59,6 @@ export const query = graphql`
   }
 `
 
-export const Head = generateHeadWithTitle("notFound")
+export const Head = generateHeadWithTitle("gears")
 
-export default NotFoundPage
+export default GearsPage
